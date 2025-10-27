@@ -86,7 +86,7 @@ public class Login extends JFrame {
                         int userId = rs.getInt("Id");
                         dispose();
 
-                        Todoapp tda = new Todoapp(Username);
+                        Todolist tda = new Todolist(Username);
                         tda.setLocationRelativeTo(null);
                         tda.setVisible(true);
 

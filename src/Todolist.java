@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class Todoapp extends JFrame {
+public class Todolist extends JFrame {
 
     private String username;
     private JTable table;
@@ -16,9 +16,9 @@ public class Todoapp extends JFrame {
     private JPanel panel1, panel2;
     private JLabel lblTitle, lblDescription, lblDeadline;
     private JTextField Title, Description, Deadline;
-    private JButton Add, Delete;
+    private JButton Logout,Add, Delete;
 
-    public Todoapp(String username) {
+    public Todolist(String username) {
         this.username = username;
 
         initComponents();
@@ -37,7 +37,7 @@ public class Todoapp extends JFrame {
         panel1 = new JPanel();
         panel1.setLayout(null);
         panel1.setBackground(new Color(220, 220, 220));
-        panel1.setBounds(0, 0, 450, 660);
+        panel1.setBounds(0, 50, 450, 660);
         panel1.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(java.awt.Color.BLACK, 1),
                 "Add Task",
@@ -107,6 +107,19 @@ public class Todoapp extends JFrame {
             }
         });
         panel2.add(Delete);
+        
+        Logout = new JButton("Logout");
+        Logout.setBounds(10,20,100,30);
+        Logout.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Login l = new Login();
+                l.setVisible(true);
+                l.setLocationRelativeTo(null);
+            }
+        });
+        add(Logout);
     }
 
     private void addTaskToDatabase() {
