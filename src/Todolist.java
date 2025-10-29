@@ -90,7 +90,7 @@ public class Todolist extends JFrame {
             }
         });
 
-        // ===== Add components to panel1 =====
+        // ===== Thêm vào panel1 =====
         panel1.add(lblTitle);
         panel1.add(lblDescription);
         panel1.add(lblDeadline);

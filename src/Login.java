@@ -119,7 +119,7 @@ public class Login extends JFrame {
             }
         });
 
-        // ===== Add Components to Panel =====
+        // ===== Thêm vào panel =====
         panel.add(lbltitle);
         panel.add(lblUsername);
         panel.add(lblPassword);
