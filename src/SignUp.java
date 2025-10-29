@@ -40,9 +40,10 @@ public class SignUp extends JFrame {
         panel = new JPanel();
         panel.setLayout(null);
         panel.setBackground(new Color(220, 220, 220)); // Màu nền xám nhạt
-        panel.setBounds(0, 0, 400, 500); // phủ toàn bộ JFrame
+        panel.setBounds(0, 0, 400, 500);
         add(panel);
 
+        // ===== Label =====
         lbltitle = new JLabel("New User Register");
         lblName = new JLabel("Name");
         lblEmail = new JLabel("Email id");
@@ -56,20 +57,23 @@ public class SignUp extends JFrame {
         lblEmail.setBounds(50, 200, 100, 30);
         lblPassword.setBounds(50, 250, 100, 30);
 
+        // ===== Text Fields =====
         name = new JTextField();
-        email = new JTextField();
         username = new JTextField();
+        email = new JTextField();
         password = new JPasswordField();
 
         name.setBounds(150, 100, 150, 30);
-        name.setFont(name.getFont().deriveFont(16f));
-        email.setBounds(150, 200, 150, 30);
-        username.setFont(username.getFont().deriveFont(16f));
-        password.setBounds(150, 250, 150, 30);
-        email.setFont(email.getFont().deriveFont(16f));
         username.setBounds(150, 150, 150, 30);
+        email.setBounds(150, 200, 150, 30);
+        password.setBounds(150, 250, 150, 30);
+
+        name.setFont(name.getFont().deriveFont(16f));
+        username.setFont(username.getFont().deriveFont(16f));
+        email.setFont(email.getFont().deriveFont(16f));
         password.setFont(password.getFont().deriveFont(16f));
 
+        // ===== Buttons =====
         sign_in = new JButton("Sign in");
         sign_in.setBounds(80, 350, 80, 30);
         sign_in.addActionListener(new ActionListener() {
@@ -93,7 +97,6 @@ public class SignUp extends JFrame {
                 String Password = password.getText();
 
                 try (Connection con = DatabaseConnection.getCon()) {
-                    // Kiểm tra tài khoản đã tồn tại chưa
                     String checkQuery = "SELECT COUNT(*) FROM details WHERE username = ? AND password = ?";
                     PreparedStatement pst = con.prepareStatement(checkQuery);
                     pst.setString(1, Username);
@@ -114,7 +117,7 @@ public class SignUp extends JFrame {
                         insertPst.executeUpdate();
                         JOptionPane.showMessageDialog(null, "Information Inserted.");
 
-                        dispose(); // đóng frame hiện tại
+                        dispose();
                         Login l = new Login();
                         l.setLocationRelativeTo(null);
                         l.setVisible(true);
@@ -126,6 +129,7 @@ public class SignUp extends JFrame {
             }
         });
 
+        // ===== Add to panel =====
         panel.add(lbltitle);
         panel.add(lblName);
         panel.add(lblEmail);
@@ -140,5 +144,4 @@ public class SignUp extends JFrame {
 
     }
 
-    
 }

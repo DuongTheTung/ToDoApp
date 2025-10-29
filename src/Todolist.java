@@ -16,7 +16,7 @@ public class Todolist extends JFrame {
     private JPanel panel1, panel2;
     private JLabel lblTitle, lblDescription, lblDeadline;
     private JTextField Title, Description, Deadline;
-    private JButton Logout,Add, Delete;
+    private JButton Logout, Add, Delete;
 
     public Todolist(String username) {
         this.username = username;
@@ -34,6 +34,7 @@ public class Todolist extends JFrame {
     }
 
     private void initComponents() {
+        // ===== Panel 1 =====
         panel1 = new JPanel();
         panel1.setLayout(null);
         panel1.setBackground(new Color(220, 220, 220));
@@ -46,6 +47,7 @@ public class Todolist extends JFrame {
         ));
         add(panel1);
 
+        // ===== Panel 2 =====
         panel2 = new JPanel();
         panel2.setLayout(null);
         panel2.setBackground(new Color(220, 220, 220));
@@ -58,22 +60,27 @@ public class Todolist extends JFrame {
         ));
         add(panel2);
 
+        // ===== Label =====
         lblTitle = new JLabel("Title:");
-        lblDescription = new JLabel("Description:");
-        lblDeadline = new JLabel("Deadline (YYYY-MM-DD):");
-
         lblTitle.setBounds(50, 250, 100, 30);
+
+        lblDescription = new JLabel("Description:");
         lblDescription.setBounds(50, 300, 100, 30);
+
+        lblDeadline = new JLabel("Deadline (YYYY-MM-DD):");
         lblDeadline.setBounds(50, 350, 200, 30);
 
+        // ===== TextField =====
         Title = new JTextField();
-        Description = new JTextField();
-        Deadline = new JTextField();
-
         Title.setBounds(200, 250, 200, 30);
+
+        Description = new JTextField();
         Description.setBounds(200, 300, 200, 30);
+
+        Deadline = new JTextField();
         Deadline.setBounds(200, 350, 200, 30);
 
+        // ===== Button: Add =====
         Add = new JButton("Add");
         Add.setBounds(300, 400, 80, 30);
         Add.addActionListener(new ActionListener() {
@@ -83,6 +90,7 @@ public class Todolist extends JFrame {
             }
         });
 
+        // ===== Add components to panel1 =====
         panel1.add(lblTitle);
         panel1.add(lblDescription);
         panel1.add(lblDeadline);
@@ -91,6 +99,7 @@ public class Todolist extends JFrame {
         panel1.add(Deadline);
         panel1.add(Add);
 
+        // ===== Table for panel2 =====
         String[] columns = {"Date", "Task", "Description", "Due Date"};
         model = new DefaultTableModel(columns, 0);
         table = new JTable(model);
@@ -98,6 +107,7 @@ public class Todolist extends JFrame {
         scrollPane.setBounds(20, 40, 680, 550);
         panel2.add(scrollPane);
 
+        // ===== Button: Delete =====
         Delete = new JButton("Delete");
         Delete.setBounds(600, 600, 100, 30);
         Delete.addActionListener(new ActionListener() {
@@ -107,10 +117,11 @@ public class Todolist extends JFrame {
             }
         });
         panel2.add(Delete);
-        
+
+        // ===== Button: Logout =====
         Logout = new JButton("Logout");
-        Logout.setBounds(10,20,100,30);
-        Logout.addActionListener(new ActionListener(){
+        Logout.setBounds(10, 20, 100, 30);
+        Logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -120,6 +131,7 @@ public class Todolist extends JFrame {
             }
         });
         add(Logout);
+
     }
 
     private void addTaskToDatabase() {
@@ -132,9 +144,8 @@ public class Todolist extends JFrame {
             return;
         }
 
-        try (Connection conn = DatabaseConnection.getCon();
-             PreparedStatement ps = conn.prepareStatement(
-                     "INSERT INTO Task (date, task, discription, dueDate, username) VALUES (CURDATE(), ?, ?, ?, ?)")) {
+        try (Connection conn = DatabaseConnection.getCon(); PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO Task (date, task, discription, dueDate, username) VALUES (CURDATE(), ?, ?, ?, ?)")) {
 
             ps.setString(1, title);
             ps.setString(2, desc);
@@ -152,8 +163,7 @@ public class Todolist extends JFrame {
     }
 
     private void loadTasksFromDatabase() {
-        try (Connection conn = DatabaseConnection.getCon();
-             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Task WHERE username = ?")) {
+        try (Connection conn = DatabaseConnection.getCon(); PreparedStatement ps = conn.prepareStatement("SELECT * FROM Task WHERE username = ?")) {
 
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
@@ -182,9 +192,8 @@ public class Todolist extends JFrame {
 
         String task = (String) model.getValueAt(selectedRow, 1);
 
-        try (Connection conn = DatabaseConnection.getCon();
-             PreparedStatement ps = conn.prepareStatement(
-                     "DELETE FROM Task WHERE task = ? AND username = ?")) {
+        try (Connection conn = DatabaseConnection.getCon(); PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM Task WHERE task = ? AND username = ?")) {
 
             ps.setString(1, task);
             ps.setString(2, username);
@@ -198,5 +207,4 @@ public class Todolist extends JFrame {
         }
     }
 
-    
 }

@@ -43,23 +43,27 @@ public class Login extends JFrame {
         panel.setBounds(0, 0, 400, 300); // phủ toàn bộ JFrame
         add(panel);
 
+        // ===== Label =====
         lbltitle = new JLabel("Login");
-        lblUsername = new JLabel("Username");
-        lblPassword = new JLabel("Password");
-
         lbltitle.setBounds(150, 40, 100, 30);
         lbltitle.setFont(lbltitle.getFont().deriveFont(25f));
+
+        lblUsername = new JLabel("Username");
         lblUsername.setBounds(50, 100, 100, 30);
+
+        lblPassword = new JLabel("Password");
         lblPassword.setBounds(50, 150, 100, 30);
 
+        // ===== TextField =====
         username = new JTextField();
-        password = new JPasswordField();
-
         username.setBounds(150, 100, 150, 30);
         username.setFont(username.getFont().deriveFont(16f));
+
+        password = new JPasswordField();
         password.setBounds(150, 150, 150, 30);
         password.setFont(password.getFont().deriveFont(16f));
 
+        // ===== Button: Login =====
         login = new JButton("Login");
         login.setBounds(100, 200, 80, 30);
         login.addActionListener(new ActionListener() {
@@ -102,6 +106,7 @@ public class Login extends JFrame {
             }
         });
 
+        // ===== Button: Sign Up =====
         sign_up = new JButton("Sign up");
         sign_up.setBounds(230, 200, 80, 30);
         sign_up.addActionListener(new ActionListener() {
@@ -114,6 +119,7 @@ public class Login extends JFrame {
             }
         });
 
+        // ===== Add Components to Panel =====
         panel.add(lbltitle);
         panel.add(lblUsername);
         panel.add(lblPassword);
